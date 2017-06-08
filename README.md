@@ -1,3 +1,5 @@
+# Readme is in progress. Not complete and may have incorrect information
+
 ## Laravel Logo Fetcher
 
 ## Installation
@@ -31,5 +33,5 @@ $result = $this->logoFetcher
     ->provider(Clearbit::class)
     ->fetch($domain);
     
-// $result['path'] will hold the path to the logo relative to the resources/storage/app directory
+// $result['path'] will hold the path to the logo relative to the storage/app directory
 ```
