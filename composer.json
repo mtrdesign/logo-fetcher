@@ -18,5 +18,6 @@
         "psr-4": {
             "MTRDesign\\LaravelLogoFetcher\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "stable"
 }
