@@ -1,0 +1,22 @@
+{
+    "name": "mtr-design/laravel-logo-fetcher",
+    "description": "Fetching companies' logos by their domain names",
+    "keywords": ["laravel", "logo", "fetcher"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MTR Design",
+            "email": "office@mtr-design.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "5.4.*",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "MTRDesign\\LaravelLogoFetcher\\": "src/"
+        }
+    }
+}
