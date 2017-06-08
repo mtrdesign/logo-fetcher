@@ -1,6 +1,6 @@
-# Readme is in progress. Not complete and may have incorrect information
-
 ## Laravel Logo Fetcher
+
+ - Readme is in progress. Not complete and may have incorrect information
 
 ## Installation
 
