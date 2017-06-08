@@ -17,7 +17,9 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__ . '/../config/logo_fetcher.php' => config_path('logo_fetcher.php'),
+        ]);
     }
 
     /**
