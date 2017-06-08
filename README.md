@@ -22,11 +22,14 @@ php artisan vendor:publish --provider="MTRDesign\LogoFetcher\ServiceProvider"
 
 ## Usage
 
-Inject the Fetcher class
+1. Inject the LogoFetcher class or resolve it from the container
+2. Set a provider using the provider() method
+3. Call the fetch() method to save the logo on your filesystem
 
 ```php
-LogoFetcher::info($object);
-LogoFetcher::error('Error!');
-LogoFetcher::warning('Watch out…');
-LogoFetcher::addMessage('Another message', 'mylabel');
+$result = $this->logoFetcher
+    ->provider(Clearbit::class)
+    ->fetch($domain);
+    
+// $result['path'] will hold the path to the logo relative to the resources/storage/app directory
 ```
