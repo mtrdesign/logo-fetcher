@@ -4,6 +4,7 @@ namespace MTRDesign\LaravelLogoFetcher;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
+use MTRDesign\LaravelLogoFetcher\Exceptions\MissingConfigException;
 use MTRDesign\LaravelLogoFetcher\Providers\ProviderContract;
 use MTRDesign\LaravelLogoFetcher\Providers\FactoryContract;
 use MTRDesign\LaravelLogoFetcher\Exceptions\InvalidDomainException;
@@ -42,6 +43,7 @@ class LogoFetcher
      * @return array With keys: string path
      * @throws InvalidDomainException
      * @throws LogoNotFoundException
+     * @throws MissingConfigException
      * @throws MissingProviderException
      * @throws SaveFailedException
      * @throws UnexpectedException
@@ -53,6 +55,10 @@ class LogoFetcher
         }
 
         $config = config('logo_fetcher.general');
+
+        if (!$config) {
+            throw new MissingConfigException('Missing config file. Solution: php artisan vendor:publish --provider="MTRDesign\LaravelLogoFetcher\ServiceProvider"');
+        }
 
         try {
             $response = $this->httpClient->request(

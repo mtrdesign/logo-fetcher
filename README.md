@@ -19,7 +19,7 @@ MTRDesign\LogoFetcher\ServiceProvider::class,
 Copy the package config to your local config with the publish command:
 
 ```shell
-php artisan vendor:publish --provider="MTRDesign\LogoFetcher\ServiceProvider"
+php artisan vendor:publish --provider="MTRDesign\LaravelLogoFetcher\ServiceProvider"
 ```
 
 ## Usage
