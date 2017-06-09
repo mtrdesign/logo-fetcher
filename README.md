@@ -1,5 +1,6 @@
 ## Laravel Logo Fetcher
 
+ - The package is not covered by tests yet
  - Readme is in progress. Not complete and may have incorrect information
 
 ## Installation
@@ -29,16 +30,37 @@ You now should have config/logo_fetcher.php file. You can open and tweak the con
 1. Inject the LogoFetcher class or resolve it from the container
 2. Set a provider using the provider() method
 3. Call the fetch() method to get the logo
-4. You can chain with save() to save it on your filesystem (make sure you create the directory defined in the configuration first - by default it is storage/app/logos)
+4. You can chain with save() to save it on your filesystem
 
+If you want to directly store the logo on your filesystem:
 ```php
-$result = $this->logoFetcher
+$this->logoFetcher
     ->provider(Clearbit::class)
     ->fetch($domain)
-    ->save();
-    
-// $result['path'] will hold the path to the logo relative to the storage/app directory
+    ->store();
 ```
+
+If you want to just fetch the logo:
+```php
+$logo = $this->logoFetcher
+    ->provider(Clearbit::class)
+    ->fetch($domain)
+    ->logo;
+```
+
+One extra example to illustrate the domain() helper and the path property:
+```php
+$path = $this->logoFetcher
+    ->provider(Clearbit::class)
+    ->domain($domain)
+    ->fetch()
+    ->store()
+    ->path;
+```
+
+## Providers
+
+You can define your own providers - just create a class and implement the MTRDesign\LaravelLogoFetcher\Providers\ProviderContract
 
 ## Error handling
 
