@@ -1,5 +1,9 @@
 # Changelog for Laravel Logo Fetcher
 
+## 1.0.3 (2017-06-22)
+- Get rid of the config() helper dependency
+- Tests fixes and improvements
+
 ## 1.0.2 (2017-06-09)
 - Separate fetching logo from storing 
 

@@ -14,9 +14,14 @@
         "illuminate/support": "~5.4",
         "guzzlehttp/guzzle": "^6.2"
     },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.7"
+    },
     "autoload": {
         "psr-4": {
-            "MTRDesign\\LaravelLogoFetcher\\": "src/"
+            "MTRDesign\\LaravelLogoFetcher\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable"
