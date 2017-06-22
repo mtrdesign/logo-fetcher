@@ -5,6 +5,7 @@ namespace MTRDesign\LaravelLogoFetcher;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Filesystem\FilesystemManager;
+use MTRDesign\LaravelLogoFetcher\Exceptions\InvalidConfigException;
 use MTRDesign\LaravelLogoFetcher\Providers\ProviderContract;
 use MTRDesign\LaravelLogoFetcher\Providers\FactoryContract;
 use MTRDesign\LaravelLogoFetcher\Exceptions\MissingConfigException;
@@ -61,19 +62,22 @@ class LogoFetcher
      * @param ClientInterface $httpClient
      * @param FactoryContract $factory
      * @param FilesystemManager $filesystemManager
+     * @param array $config
      * @throws MissingConfigException
      */
-    public function __construct(ClientInterface $httpClient, FactoryContract $factory, FilesystemManager $filesystemManager)
+    public function __construct(
+        ClientInterface $httpClient,
+        FactoryContract $factory,
+        FilesystemManager $filesystemManager,
+        array $config
+    )
     {
+        $this->validateConfig($config);
+
         $this->httpClient = $httpClient;
         $this->factory = $factory;
         $this->filesystem = $filesystemManager;
-
-        $this->config = config('logo_fetcher.general');
-
-        if (!$this->config) {
-            throw new MissingConfigException('Missing config file. Solution: php artisan vendor:publish --provider="MTRDesign\LaravelLogoFetcher\ServiceProvider"');
-        }
+        $this->config = $config;
     }
 
     /**
@@ -196,5 +200,36 @@ class LogoFetcher
         $this->domain = $domain;
 
         return $this;
+    }
+
+    /**
+     * Validate the config data
+     *
+     * @param array $config
+     * @throws InvalidConfigException
+     */
+    protected function validateConfig(array $config)
+    {
+        $requiredKeys = ['size', 'format', 'upload_path'];
+
+        foreach ($requiredKeys as $key) {
+            if (array_key_exists($key, $config)) {
+                continue;
+            }
+
+            throw new InvalidConfigException('Missing key ' . $key);
+        }
+
+        if (!is_string($config['format'])) {
+            throw new InvalidConfigException('format must be string');
+        }
+
+        if (!is_string($config['upload_path'])) {
+            throw new InvalidConfigException('upload_path must be string');
+        }
+
+        if (!is_int($config['size'])) {
+            throw new InvalidConfigException('size must be int');
+        }
     }
 }

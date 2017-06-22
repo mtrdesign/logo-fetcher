@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\LaravelLogoFetcher\Stubs;
+namespace Tests\Stubs;
 
 use MTRDesign\LaravelLogoFetcher\Providers\ProviderContract;
 use Psr\Http\Message\ResponseInterface;
